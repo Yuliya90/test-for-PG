@@ -1,0 +1,93 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="style.css" rel="stylesheet">
+</head>
+<style>
+  .accordion {
+    background-color: #CE0953;
+    color: #FFFCFC;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    transition: 0.4s;
+    margin-top: 10px;
+}
+.accordion:after {
+    content: '\002B';
+    color: #FFFCFC;
+    font-weight: bold;
+    float: left;
+    margin-right: 10px;
+}
+
+.active:after {
+    content: "\2212";
+}
+
+.txt {
+    padding: 0 18px;
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+</style>
+<body>
+<button class="accordion">Accordion 1</button>
+<div class="txt">
+  <p>Задача организации, в особенности же реализация намеченных плановых заданий играет важную роль в формировании направлений прогрессивного развития. Таким образом новая модель организационной деятельности позволяет выполнять важные задания по разработке систем массового участия.</p>
+</div>
+
+<button class="accordion">Accordion 2</button>
+<div class="txt">
+  <p>Не следует, однако забывать, что начало повседневной работы по формированию позиции в значительной степени обуславливает создание систем массового участия. Товарищи! новая модель организационной деятельности влечет за собой процесс внедрения и модернизации систем массового участия. Идейные соображения высшего порядка, а также консультация с широким активом позволяет выполнять важные задания по разработке модели развития.</p>
+</div>
+
+<button class="accordion">Accordion 3</button>
+<div class="txt">
+  <p>Равным образом укрепление и развитие структуры способствует подготовки и реализации форм развития. Задача организации, в особенности же начало повседневной работы по формированию позиции влечет за собой процесс внедрения и модернизации форм развития.</p>
+</div>
+
+<div class="changeText"></div>
+<script>
+  var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var txt = this.nextElementSibling;
+    if (txt.style.maxHeight){
+      txt.style.maxHeight = null;
+    } else {
+      txt.style.maxHeight = txt.scrollHeight + "px";
+    } 
+  });
+}
+
+var stringa = "{Пожалуйста|Просто} сделайте так, чтобы это {удивительное|крутое|простое}тестовое предложение {изменялось {быстро|мгновенно} случайным образом|менялось каждый раз}.";
+
+function change(str){
+    str = str.replace(/\{([^{]+?)\}/g, function(full, match){
+        var bits = match.split('|');
+        return bits[Math.floor(Math.random(1)*bits.length)];
+    });
+    var out = str.indexOf('|') != -1 ? change(str) : str;
+    document.getElementsByClassName("changeText")[0].innerText=out;
+    return out;
+}
+setInterval(() => change(stringa), 2000);
+</script>
+</body>
+</html>
+
+
+
